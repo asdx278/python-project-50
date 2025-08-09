@@ -2,7 +2,7 @@ install:
 	uv sync
 
 gendiff-plane-files:
-	uv run gendiff gendiff/file1.json gendiff/file2.json
+	uv run gendiff tests/test_data/file1.json tests/test_data/file2.json
 
 build:
 	uv build
@@ -15,3 +15,9 @@ package-install-force:
 
 lint:
 	uv run ruff check gendiff
+
+test:
+	uv run pytest
+
+test-coverage:
+	uv run pytest --cov=gendiff --cov-report=xml
