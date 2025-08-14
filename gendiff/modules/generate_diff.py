@@ -22,6 +22,5 @@ def generate_diff(first_file_path, second_file_path):
         if key not in first_file:
             first_second_diff += f'  + {key}: {value}\n'
 
-    # print(f'{{\n{first_second_diff.lower()}}}')
     return f'{{\n{first_second_diff.lower()}}}'
 

@@ -1,8 +1,11 @@
 install:
 	uv sync
 
-gendiff-plane-files:
+gendiff-plane-json:
 	uv run gendiff tests/test_data/file1.json tests/test_data/file2.json
+
+gendiff-plane-yaml:
+	uv run gendiff tests/test_data/file1.yml tests/test_data/file2.yml
 
 build:
 	uv build
