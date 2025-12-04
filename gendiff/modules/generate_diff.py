@@ -1,7 +1,7 @@
 from gendiff.modules.read_file import read_file
 
 
-def generate_diff(first_file_path, second_file_path):
+def generate_diff(first_file_path, second_file_path, format):
     """Функция сравнения двух плоских файлов в формате json"""
 
     first_second_diff = ''
