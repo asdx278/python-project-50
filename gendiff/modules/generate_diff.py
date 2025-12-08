@@ -1,26 +1,63 @@
-from gendiff.modules.read_file import read_file
+def generate_diff(first_file, second_file, format):
+    """Генерирует различия между двумя структурами данных.
 
+    Функция рекурсивно сравнивает две структуры данных (словари)
+    и формирует список различий с указанием статуса каждого ключа.
+    Поддерживает вложенные структуры и различные типы изменений.
 
-def generate_diff(first_file_path, second_file_path, format):
-    """Функция сравнения двух плоских файлов в формате json"""
+    Args:
+        first_file (dict): Первая структура данных для сравнения
+        second_file (dict): Вторая структура данных для сравнения
+        format (str): Формат вывода результата сравнения
+                      (например, 'stylish', 'plain', 'json')
 
-    first_second_diff = ''
+    Returns:
+        list: Список словарей с результатами сравнения,
+              где каждый элемент содержит ключ, статус
+              (added/removed/changed/unchanged/nested)
+              и соответствующие значения
+    """
 
-    first_file = read_file(first_file_path)
-    second_file = read_file(second_file_path)
+    # получаем уникальные ключи из обоих файлов и сортируем их
+    UNIQUE_KEYS = sorted(first_file.keys() | second_file.keys())
 
-    for key, value in first_file.items():
-        if key in second_file and value != second_file[key]:
-            first_second_diff += f'  - {key}: {value}\n'
-            first_second_diff += f'  + {key}: {second_file[key]}\n'
+    def processed_diff(key):
+        first_is_dict = isinstance(first_file.get(key), dict)
+        second_is_dict = isinstance(second_file.get(key), dict)
+        if first_is_dict and second_is_dict:
+            return {
+                "key": key,
+                "status": "nested",
+                "children": generate_diff(
+                    first_file.get(key),
+                    second_file.get(key),
+                    format
+                )
+            }
         if key not in second_file:
-            first_second_diff += f'  - {key}: {value}\n'
-        if key in second_file and value == second_file[key]:
-            first_second_diff += f'    {key}: {value}\n'
-
-    for key, value in second_file.items():
+            return {
+                "key": key,
+                "status": "removed",
+                "value": first_file.get(key)
+            }
         if key not in first_file:
-            first_second_diff += f'  + {key}: {value}\n'
+            return {
+                "key": key,
+                "status": "added",
+                "value": second_file.get(key)
+            }
+        if first_file.get(key) != second_file.get(key):
+            return {
+                "key": key,
+                "status": "changed",
+                "old_value": first_file.get(key),
+                "new_value": second_file.get(key)
+            }
+        return {
+            "key": key,
+            "status": "unchanged",
+            "value": first_file.get(key)
+        }
 
-    return f'{{\n{first_second_diff.lower()}}}'
-
+    result_diff = list(map(processed_diff, UNIQUE_KEYS))
+    return result_diff
