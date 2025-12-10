@@ -1,6 +1,6 @@
 import argparse
 
-from gendiff.formatters import format_stylish
+from gendiff.formatters import choice_formatters
 from gendiff.modules import generate_diff, read_file
 
 
@@ -19,8 +19,8 @@ def main():
 
     diff = generate_diff(read_file(args.first_file),
                           read_file(args.second_file), args.format)
-    formatting = format_stylish(diff)
-    print(formatting)
+    current_format = choice_formatters(diff, args.format)
+    print(current_format)
 
 
 if __name__ == "__main__":
