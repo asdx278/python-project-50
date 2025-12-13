@@ -60,4 +60,5 @@ def generate_diff(first_file, second_file, format):
         }
 
     result_diff = list(map(processed_diff, UNIQUE_KEYS))
+
     return result_diff

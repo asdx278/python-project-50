@@ -8,7 +8,11 @@ def to_str(value, depth):
             lines.append(f"{indent}    {k}: {to_str(v, depth + 1)}")
         lines.append(f"{indent}}}")
         return '\n'.join(lines)
-    return str(value).lower() if isinstance(value, bool) else str(value)
+    if value is None:
+        return 'null'
+    if isinstance(value, bool):
+        return str(value).lower()
+    return str(value)
 
 
 def iter_(current_tree, depth):

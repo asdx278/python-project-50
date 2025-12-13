@@ -19,8 +19,8 @@ def main():
 
     diff = generate_diff(read_file(args.first_file),
                           read_file(args.second_file), args.format)
-    current_format = choice_formatters(diff, args.format)
-    print(current_format)
+    current_diff = choice_formatters(diff, args.format)
+    print(current_diff)
 
 
 if __name__ == "__main__":
