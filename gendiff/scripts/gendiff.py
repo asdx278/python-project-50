@@ -1,7 +1,7 @@
 import argparse
 
 from gendiff.formatters import choice_formatters
-from gendiff.modules import generate_diff, read_file
+from gendiff.modules import generate_diff
 
 
 def main():
@@ -17,8 +17,7 @@ def main():
     )
     args = parser.parse_args()
 
-    diff = generate_diff(read_file(args.first_file),
-                          read_file(args.second_file), args.format)
+    diff = generate_diff(args.first_file, args.second_file, args.format)
     current_diff = choice_formatters(diff, args.format)
     print(current_diff)
 

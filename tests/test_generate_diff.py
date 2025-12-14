@@ -4,7 +4,6 @@ import pytest
 
 from gendiff.formatters.choice_formatters import choice_formatters
 from gendiff.modules.generate_diff import generate_diff
-from gendiff.modules.read_file import read_file
 
 
 # Fixtures для ожидаемых результатов
@@ -44,9 +43,7 @@ class TestStylishFormatter:
         """Тест форматирования простых JSON файлов в формате stylish."""
         path1 = 'tests/test_data/file1_simple.json'
         path2 = 'tests/test_data/file2_simple.json'
-        data1 = read_file(path1)
-        data2 = read_file(path2)
-        diff = generate_diff(data1, data2, 'stylish')
+        diff = generate_diff(path1, path2, 'stylish')
         actual = choice_formatters(diff, 'stylish')
         assert actual.strip() == expected_stylish_simple
 
@@ -54,9 +51,7 @@ class TestStylishFormatter:
         """Тест форматирования простых YAML файлов в формате stylish."""
         path1 = 'tests/test_data/file1_simple.yml'
         path2 = 'tests/test_data/file2_simple.yml'
-        data1 = read_file(path1)
-        data2 = read_file(path2)
-        diff = generate_diff(data1, data2, 'stylish')
+        diff = generate_diff(path1, path2, 'stylish')
         actual = choice_formatters(diff, 'stylish')
         assert actual.strip() == expected_stylish_simple
 
@@ -64,9 +59,7 @@ class TestStylishFormatter:
         """Тест форматирования вложенных JSON файлов в формате stylish."""
         path1 = 'tests/test_data/file1_nested.json'
         path2 = 'tests/test_data/file2_nested.json'
-        data1 = read_file(path1)
-        data2 = read_file(path2)
-        diff = generate_diff(data1, data2, 'stylish')
+        diff = generate_diff(path1, path2, 'stylish')
         actual = choice_formatters(diff, 'stylish')
         assert actual.strip() == expected_stylish_nested
 
@@ -79,9 +72,7 @@ class TestPlaneFormatter:
         """Тест форматирования простых JSON файлов в формате plane."""
         path1 = 'tests/test_data/file1_simple.json'
         path2 = 'tests/test_data/file2_simple.json'
-        data1 = read_file(path1)
-        data2 = read_file(path2)
-        diff = generate_diff(data1, data2, 'plane')
+        diff = generate_diff(path1, path2, 'plane')
         actual = choice_formatters(diff, 'plane')
         assert actual.strip() == expected_plane_simple
 
@@ -89,9 +80,7 @@ class TestPlaneFormatter:
         """Тест форматирования простых YAML файлов в формате plane."""
         path1 = 'tests/test_data/file1_simple.yml'
         path2 = 'tests/test_data/file2_simple.yml'
-        data1 = read_file(path1)
-        data2 = read_file(path2)
-        diff = generate_diff(data1, data2, 'plane')
+        diff = generate_diff(path1, path2, 'plane')
         actual = choice_formatters(diff, 'plane')
         assert actual.strip() == expected_plane_simple
 
@@ -99,9 +88,7 @@ class TestPlaneFormatter:
         """Тест форматирования вложенных JSON файлов в формате plane."""
         path1 = 'tests/test_data/file1_nested.json'
         path2 = 'tests/test_data/file2_nested.json'
-        data1 = read_file(path1)
-        data2 = read_file(path2)
-        diff = generate_diff(data1, data2, 'plane')
+        diff = generate_diff(path1, path2, 'plane')
         actual = choice_formatters(diff, 'plane')
         assert actual.strip() == expected_plane_nested
 
@@ -114,9 +101,7 @@ class TestJsonFormatter:
         """Тест форматирования простых JSON файлов в формате json."""
         path1 = 'tests/test_data/file1_simple.json'
         path2 = 'tests/test_data/file2_simple.json'
-        data1 = read_file(path1)
-        data2 = read_file(path2)
-        diff = generate_diff(data1, data2, 'json')
+        diff = generate_diff(path1, path2, 'json')
         actual = choice_formatters(diff, 'json')
         assert isinstance(actual, list)
         assert all(isinstance(item, dict) for item in actual)
@@ -126,9 +111,7 @@ class TestJsonFormatter:
         """Тест форматирования вложенных JSON файлов в формате json."""
         path1 = 'tests/test_data/file1_nested.json'
         path2 = 'tests/test_data/file2_nested.json'
-        data1 = read_file(path1)
-        data2 = read_file(path2)
-        diff = generate_diff(data1, data2, 'json')
+        diff = generate_diff(path1, path2, 'json')
         actual = choice_formatters(diff, 'json')
         assert isinstance(actual, list)
         assert all(isinstance(item, dict) for item in actual)
