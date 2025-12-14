@@ -3,7 +3,7 @@ def generate_diff(first_file, second_file, format='stylish'):
 
     Функция принимает пути к файлам, читает и парсит их,
     затем рекурсивно сравнивает структуры данных и формирует
-    список различий с указанием статуса каждого ключа.
+    отформатированный результат сравнения.
     Поддерживает вложенные структуры и различные типы изменений.
 
     Args:
@@ -13,18 +13,20 @@ def generate_diff(first_file, second_file, format='stylish'):
                       (например, 'stylish', 'plain', 'json')
 
     Returns:
-        list: Список словарей с результатами сравнения,
-              где каждый элемент содержит ключ, статус
-              (added/removed/changed/unchanged/nested)
-              и соответствующие значения
+        str: Отформатированная строка с результатами сравнения
     """
+    from gendiff.formatters.choice_formatters import choice_formatters
     from gendiff.modules.read_file import read_file
 
     # Читаем и парсим файлы
     first_data = read_file(first_file)
     second_data = read_file(second_file)
 
-    return build_diff(first_data, second_data)
+    # Строим дерево различий
+    diff = build_diff(first_data, second_data)
+
+    # Форматируем результат
+    return choice_formatters(diff, format)
 
 
 def build_diff(first_data, second_data):

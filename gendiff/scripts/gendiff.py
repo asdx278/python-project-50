@@ -1,6 +1,5 @@
 import argparse
 
-from gendiff.formatters import choice_formatters
 from gendiff.modules import generate_diff
 
 
@@ -17,9 +16,8 @@ def main():
     )
     args = parser.parse_args()
 
-    diff = generate_diff(args.first_file, args.second_file, args.format)
-    current_diff = choice_formatters(diff, args.format)
-    print(current_diff)
+    result = generate_diff(args.first_file, args.second_file, args.format)
+    print(result)
 
 
 if __name__ == "__main__":

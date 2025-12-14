@@ -2,7 +2,6 @@ from pathlib import Path
 
 import pytest
 
-from gendiff.formatters.choice_formatters import choice_formatters
 from gendiff.modules.generate_diff import generate_diff
 
 
@@ -43,24 +42,21 @@ class TestStylishFormatter:
         """Тест форматирования простых JSON файлов в формате stylish."""
         path1 = 'tests/test_data/file1_simple.json'
         path2 = 'tests/test_data/file2_simple.json'
-        diff = generate_diff(path1, path2, 'stylish')
-        actual = choice_formatters(diff, 'stylish')
+        actual = generate_diff(path1, path2, 'stylish')
         assert actual.strip() == expected_stylish_simple
 
     def test_format_stylish_simple_yaml(self, expected_stylish_simple):
         """Тест форматирования простых YAML файлов в формате stylish."""
         path1 = 'tests/test_data/file1_simple.yml'
         path2 = 'tests/test_data/file2_simple.yml'
-        diff = generate_diff(path1, path2, 'stylish')
-        actual = choice_formatters(diff, 'stylish')
+        actual = generate_diff(path1, path2, 'stylish')
         assert actual.strip() == expected_stylish_simple
 
     def test_format_stylish_nested_json(self, expected_stylish_nested):
         """Тест форматирования вложенных JSON файлов в формате stylish."""
         path1 = 'tests/test_data/file1_nested.json'
         path2 = 'tests/test_data/file2_nested.json'
-        diff = generate_diff(path1, path2, 'stylish')
-        actual = choice_formatters(diff, 'stylish')
+        actual = generate_diff(path1, path2, 'stylish')
         assert actual.strip() == expected_stylish_nested
 
 
@@ -72,24 +68,21 @@ class TestPlaneFormatter:
         """Тест форматирования простых JSON файлов в формате plane."""
         path1 = 'tests/test_data/file1_simple.json'
         path2 = 'tests/test_data/file2_simple.json'
-        diff = generate_diff(path1, path2, 'plane')
-        actual = choice_formatters(diff, 'plane')
+        actual = generate_diff(path1, path2, 'plane')
         assert actual.strip() == expected_plane_simple
 
     def test_format_plane_simple_yaml(self, expected_plane_simple):
         """Тест форматирования простых YAML файлов в формате plane."""
         path1 = 'tests/test_data/file1_simple.yml'
         path2 = 'tests/test_data/file2_simple.yml'
-        diff = generate_diff(path1, path2, 'plane')
-        actual = choice_formatters(diff, 'plane')
+        actual = generate_diff(path1, path2, 'plane')
         assert actual.strip() == expected_plane_simple
 
     def test_format_plane_nested_json(self, expected_plane_nested):
         """Тест форматирования вложенных JSON файлов в формате plane."""
         path1 = 'tests/test_data/file1_nested.json'
         path2 = 'tests/test_data/file2_nested.json'
-        diff = generate_diff(path1, path2, 'plane')
-        actual = choice_formatters(diff, 'plane')
+        actual = generate_diff(path1, path2, 'plane')
         assert actual.strip() == expected_plane_nested
 
 
@@ -101,8 +94,7 @@ class TestJsonFormatter:
         """Тест форматирования простых JSON файлов в формате json."""
         path1 = 'tests/test_data/file1_simple.json'
         path2 = 'tests/test_data/file2_simple.json'
-        diff = generate_diff(path1, path2, 'json')
-        actual = choice_formatters(diff, 'json')
+        actual = generate_diff(path1, path2, 'json')
         assert isinstance(actual, list)
         assert all(isinstance(item, dict) for item in actual)
         assert all('key' in item and 'status' in item for item in actual)
@@ -111,8 +103,7 @@ class TestJsonFormatter:
         """Тест форматирования вложенных JSON файлов в формате json."""
         path1 = 'tests/test_data/file1_nested.json'
         path2 = 'tests/test_data/file2_nested.json'
-        diff = generate_diff(path1, path2, 'json')
-        actual = choice_formatters(diff, 'json')
+        actual = generate_diff(path1, path2, 'json')
         assert isinstance(actual, list)
         assert all(isinstance(item, dict) for item in actual)
         # Проверка структуры вложенных элементов
