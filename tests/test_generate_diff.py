@@ -60,29 +60,29 @@ class TestStylishFormatter:
         assert actual.strip() == expected_stylish_nested
 
 
-# Тесты для формата plane
-class TestPlaneFormatter:
-    """Тесты для форматтера plane."""
+# Тесты для формата plain
+class TestPlainFormatter:
+    """Тесты для форматтера plain."""
 
-    def test_format_plane_simple_json(self, expected_plane_simple):
-        """Тест форматирования простых JSON файлов в формате plane."""
+    def test_format_plain_simple_json(self, expected_plane_simple):
+        """Тест форматирования простых JSON файлов в формате plain."""
         path1 = 'tests/test_data/file1_simple.json'
         path2 = 'tests/test_data/file2_simple.json'
-        actual = generate_diff(path1, path2, 'plane')
+        actual = generate_diff(path1, path2, 'plain')
         assert actual.strip() == expected_plane_simple
 
-    def test_format_plane_simple_yaml(self, expected_plane_simple):
-        """Тест форматирования простых YAML файлов в формате plane."""
+    def test_format_plain_simple_yaml(self, expected_plane_simple):
+        """Тест форматирования простых YAML файлов в формате plain."""
         path1 = 'tests/test_data/file1_simple.yml'
         path2 = 'tests/test_data/file2_simple.yml'
-        actual = generate_diff(path1, path2, 'plane')
+        actual = generate_diff(path1, path2, 'plain')
         assert actual.strip() == expected_plane_simple
 
-    def test_format_plane_nested_json(self, expected_plane_nested):
-        """Тест форматирования вложенных JSON файлов в формате plane."""
+    def test_format_plain_nested_json(self, expected_plane_nested):
+        """Тест форматирования вложенных JSON файлов в формате plain."""
         path1 = 'tests/test_data/file1_nested.json'
         path2 = 'tests/test_data/file2_nested.json'
-        actual = generate_diff(path1, path2, 'plane')
+        actual = generate_diff(path1, path2, 'plain')
         assert actual.strip() == expected_plane_nested
 
 
