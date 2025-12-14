@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 import pytest
@@ -94,7 +95,11 @@ class TestJsonFormatter:
         """Тест форматирования простых JSON файлов в формате json."""
         path1 = 'tests/test_data/file1_simple.json'
         path2 = 'tests/test_data/file2_simple.json'
-        actual = generate_diff(path1, path2, 'json')
+        result = generate_diff(path1, path2, 'json')
+        # Проверяем, что результат - строка
+        assert isinstance(result, str)
+        # Парсим JSON
+        actual = json.loads(result)
         assert isinstance(actual, list)
         assert all(isinstance(item, dict) for item in actual)
         assert all('key' in item and 'status' in item for item in actual)
@@ -103,7 +108,11 @@ class TestJsonFormatter:
         """Тест форматирования вложенных JSON файлов в формате json."""
         path1 = 'tests/test_data/file1_nested.json'
         path2 = 'tests/test_data/file2_nested.json'
-        actual = generate_diff(path1, path2, 'json')
+        result = generate_diff(path1, path2, 'json')
+        # Проверяем, что результат - строка
+        assert isinstance(result, str)
+        # Парсим JSON
+        actual = json.loads(result)
         assert isinstance(actual, list)
         assert all(isinstance(item, dict) for item in actual)
         # Проверка структуры вложенных элементов
