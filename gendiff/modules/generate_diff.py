@@ -1,4 +1,4 @@
-def generate_diff(first_file, second_file, format):
+def generate_diff(first_file, second_file, format='stylish'):
     """Генерирует различия между двумя структурами данных.
 
     Функция рекурсивно сравнивает две структуры данных (словари)
