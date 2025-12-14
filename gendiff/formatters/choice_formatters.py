@@ -7,5 +7,6 @@ def choice_formatters(diff, format_name):
         return format_stylish(diff)
     elif format_name == 'plane':
         return format_plane(diff)
-    # Additional formatters can be added here
+    elif format_name == 'json':
+        return diff
     raise ValueError(f"Unknown format: {format_name}")
